@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
@@ -8,15 +9,18 @@ y = np.array([20, 25, 35, 55, 60, 65, 75, 85, 90])
 model = LinearRegression()
 model.fit(X, y)
 
+
 def home(request):
     result = None
-    if request.method == 'POST':
+    if request.method == "POST":
         try:
             hours = float(request.POST.get("hours"))
             predicted = model.predict([[hours]])
             result = round(predicted[0], 2)
         except:
             result = "Invalid input!"
-    return render(request, 'predictor/home.html', {'result': result})
+    return render(request, "predictor/home.html", {"result": result})
 
-# Create your views here.
+
+def welcome(request):
+    return HttpResponse("Welcome to Score Predictor!")
