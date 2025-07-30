@@ -6,12 +6,12 @@
 # ]
 
 # from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path("", views.welcome, name="home"),
+    path("predict/", views.index, name="predict"),
     # path("admin/", admin.site.urls),
     # path('', include('predictor.urls')),
 ]
-
