@@ -10,7 +10,7 @@ model = LinearRegression()
 model.fit(X, y)
 
 
-def home(request):
+def index(request):
     result = None
     if request.method == "POST":
         try:
@@ -19,7 +19,7 @@ def home(request):
             result = round(predicted[0], 2)
         except:
             result = "Invalid input!"
-    return render(request, "predictor/home.html", {"result": result})
+    return render(request, "predictor/index.html", {"result": result})
 
 
 def welcome(request):
