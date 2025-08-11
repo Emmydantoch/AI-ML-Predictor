@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-4dr+%hmj)^ity6^+s$piq)$u-4=qq=((znz775ph!e7prz2a@c
 DEBUG = True
 
 ALLOWED_HOSTS = ["scorepredictor.onrender.com", "127.0.0.1"]
-
+# ALLOWED_HOSTS = ['*']  # For testing; replace with your Render domain (e.g., '*.onrender.com') in production
 
 # Application definition
 
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "scorepredictor.urls"
@@ -56,7 +57,8 @@ ROOT_URLCONF = "scorepredictor.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],  # If you have project-level templates
+        # "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -118,7 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [BASE_DIR / "static"]  # Optional: for custom static files
+STATIC_ROOT = BASE_DIR / "staticfiles"    # For collecting static files
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
