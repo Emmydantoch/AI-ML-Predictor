@@ -20,7 +20,3 @@ def index(request):
         except:
             result = "Invalid input!"
     return render(request, "predictor/index.html", {"result": result})
-
-
-def welcome(request):
-    return HttpResponse("Welcome to Score Predictor!")
